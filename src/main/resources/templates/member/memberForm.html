@@ -4,16 +4,11 @@
       layout:decorate="~{layouts/layout1}">
     <head>
     	<meta charset="utf-8">
-    	<!-- <th:block layout:fragment="script">
-    		<script th:inline="javascript">
-    			$(document).ready(function(){
-    				let errorMsg = [[${errorMsg}]];
-    				if(errorMsg != null){
-    					alert(errorMsg);
-    				}
-    			});
-    		</script>
-    	</th:block> -->
+    	<th:block layout:fragment="css">
+    		<style>
+    			.error{color: #bd2130}
+    		</style>
+    	</th:block>
     	
     </head>  
 	<div layout:fragment="content" class="content">
@@ -23,28 +18,28 @@
 				<label th:for="name">이름</label>
 				<input type="text" th:field="*{name}" class="form-control"
 					   placeholder="이름을 입력해주세요">
-				<p th:if="${#fields.hasErrors('name')}"
+				<p th:if="${#fields.hasErrors('name')}" class="error"
 				   th:errors="*{name}">Incorrect data</p>
 			</div>
 			<div class="form-group">
 				<label th:for="email">이메일</label>
 				<input type="email" th:field="*{email}" class="form-control"
 					   placeholder="이메일을 입력해주세요">
-				<p th:if="${#fields.hasErrors('email')}"
+				<p th:if="${#fields.hasErrors('email')}" class="error"
 				   th:errors="*{email}">Incorrect data</p>
 			</div>
 			<div class="form-group">
 				<label th:for="password">비밀번호</label>
 				<input type="password" th:field="*{password}" class="form-control"
 					   placeholder="비밀번호를 입력해주세요">
-				<p th:if="${#fields.hasErrors('password')}"
+				<p th:if="${#fields.hasErrors('password')}" class="error"
 				   th:errors="*{password}">Incorrect data</p>
 			</div>
 			<div class="form-group">
 				<label th:for="address">주소</label>
 				<input type="text" th:field="*{address}" class="form-control"
 					   placeholder="주소를 입력해주세요">
-				<p th:if="${#fields.hasErrors('address')}"
+				<p th:if="${#fields.hasErrors('address')}" class="error"
 				   th:errors="*{address}">Incorrect data</p>
 			</div>
 			<div style="text-align: center">
