@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.shop.constant.Role;
 import com.shop.dto.MemberFormDto;
 import com.shop.entity.Member;
 
@@ -26,7 +27,7 @@ public class MemberServiceTest {
 	//회원 생성
 	public Member createMember() {
 		MemberFormDto memberFormDto = new MemberFormDto();
-		memberFormDto.setEmail("test@test.com");
+		memberFormDto.setEmail("test3@test.com");
 		memberFormDto.setName("이순신");
 		memberFormDto.setAddress("서울시 구로구");
 		memberFormDto.setPassword("1234");
@@ -34,14 +35,14 @@ public class MemberServiceTest {
 	}
 	
 	//회원 가입
-	/*@Test
+	@Test
 	public void saveMemberTest() {
 		Member member = createMember();
 		memberService.saveMember(member);
-	}*/
+	}
 	
 	//이메일 중복 체크 
-	@Test
+	/*@Test
 	public void saveDuplicateMemberTest() {
 		Member member1 = createMember();
 		Member member2 = createMember();
@@ -52,7 +53,7 @@ public class MemberServiceTest {
 		});
 		
 		assertEquals("이미 가입된 회원입니다.", e.getMessage());
-	}
+	}*/
 	
 	
 	
