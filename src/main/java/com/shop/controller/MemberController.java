@@ -38,7 +38,7 @@ public class MemberController {
 		return "member/loginForm";
 	}
 	
-	//회원 가입 폼 요청
+	//회원 가입 페이지 요청
 	@GetMapping("/new")
 	public String memberForm(Model model) {
 		model.addAttribute("memberFormDto", new MemberFormDto());

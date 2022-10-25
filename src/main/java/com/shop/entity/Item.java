@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
+import com.shop.config.BaseEntity;
 import com.shop.constant.ItemSellStatus;
 
 import lombok.Getter;
@@ -20,7 +21,7 @@ import lombok.ToString;
 @ToString
 @Getter @Setter
 @Entity
-public class Item {
+public class Item extends BaseEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,8 +43,5 @@ public class Item {
 	
 	@Enumerated(EnumType.STRING)
 	private ItemSellStatus itemSellStatus;
-	
-	private LocalDateTime regTime;  //등록 시간
-	
-	private LocalDateTime updateTime;  //수정 시간
+
 }

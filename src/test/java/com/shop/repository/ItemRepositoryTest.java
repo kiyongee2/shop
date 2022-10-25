@@ -45,22 +45,22 @@ public class ItemRepositoryTest {
 		}
 	}
 	
-	/*@Test
+	@Test
 	public void findByItemNmTest() {
 		this.createItemList();
 		List<Item> itemList = itemRepo.findByItemNm("테스트 상품 5");
 		for(Item item : itemList) {
 			System.out.println(item.toString());
 		}
-	}*/
+	}
 	
-	@Test
+	/*@Test
 	public void findByPriceLessThanOrderByPriceDescTest() {
 		List<Item> itemList = itemRepo.findByPriceLessThanOrderByPriceDesc(10005);
 		for(Item item : itemList) {
 			System.out.println(item.toString());
 		}
-	}
+	}*/
 	
 	
 }
