@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.shop.dto.ItemFormDto;
 import com.shop.dto.ItemImgDto;
 import com.shop.dto.ItemSearchDto;
+import com.shop.dto.MainItemDto;
 import com.shop.entity.Item;
 import com.shop.entity.ItemImg;
 import com.shop.repository.ItemImgRepository;
@@ -101,6 +102,13 @@ public class ItemService {
 	public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, 
 			Pageable pageable){
 		return itemRepo.getAdminItemPage(itemSearchDto, pageable);
+	}
+	
+	//메인 페이지 상품 데이터 조회
+	@Transactional(readOnly = true)
+	public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto,
+			Pageable pageable){
+		return itemRepo.getMainItemPage(itemSearchDto, pageable);
 	}
 }
 
