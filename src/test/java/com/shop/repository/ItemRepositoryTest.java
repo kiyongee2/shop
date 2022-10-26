@@ -68,7 +68,7 @@ public class ItemRepositoryTest {
 		}
 	}*/
 	
-	/*@Test
+	@Test
 	public void createItemList2() {
 		for(int i=1; i<=5; i++) {
 			Item item = new Item();
@@ -89,7 +89,7 @@ public class ItemRepositoryTest {
 			item.setStockNumber(0);
 			itemRepo.save(item);
 		}
-	}*/
+	}
 	
 	//Querydsl 테스트 - 상품 상세설명이 "신상품 상세"이고,
 	//가격이 1003보다 크고, 상품 상태가 SELL인 상품 검색

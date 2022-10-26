@@ -7,10 +7,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.thymeleaf.util.StringUtils;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.shop.constant.ItemSellStatus;
 import com.shop.dto.ItemSearchDto;
@@ -77,8 +79,17 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 				.offset(pageable.getOffset())
 				.limit(pageable.getPageSize())
 				.fetch();
-						
-		return null;
+		
+		//전체 개수
+		long total = queryFactory.select(Wildcard.count).from(QItem.item)
+				.where(regDtsAfter(itemSearchDto.getSearchDateType()),
+					   searchSellStatusEq(itemSearchDto.getSearchSellStatus()),
+					   searchByLike(itemSearchDto.getSearchBy(), 
+							 itemSearchDto.getSearchQuery()))
+				.fetchOne();
+		
+		//Page 인터페이스와 구현체인 PageImpl 객체로 반환함
+		return new PageImpl<>(content, pageable, total);
 	}
 
 }

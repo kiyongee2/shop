@@ -3,9 +3,13 @@ package com.shop.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shop.dto.ItemFormDto;
+import com.shop.dto.ItemSearchDto;
+import com.shop.entity.Item;
 import com.shop.service.ItemService;
 
 import lombok.RequiredArgsConstructor;
@@ -95,6 +101,23 @@ public class ItemController {
 			return "item/itemForm";
 		}
 		return "redirect:/";
+	}
+	
+	//상품 검색 및 페이지
+	//상품 관리 페이지 진입시 페이지 번호가 없는 경우와 있는 경우
+	@GetMapping({"/admin/items", "/admin/items/{page}"})
+	public String itemManage(ItemSearchDto itemSearchDto, 
+			@PathVariable("page") Optional<Integer> page, Model model) {
+		//3을 페이지당 자료의 개수
+		Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
+		//상품 검색 및 페이지 메서드 호출
+		Page<Item> items = itemService.getAdminItemPage(itemSearchDto, pageable);
+		
+		model.addAttribute("items", items);  //items를 뷰로 전달
+		model.addAttribute("itemSearchDto", itemSearchDto); //검색 조건을 유지한 채 이동
+		model.addAttribute("maxPage", 5);  //화면 하단에 보여줄 페이지 번호의 개수(1 2 3 4 5)
+		
+		return "item/itemMng";
 	}
 	
 	

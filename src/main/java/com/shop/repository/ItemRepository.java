@@ -8,7 +8,7 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import com.shop.entity.Item;
 
 public interface ItemRepository extends JpaRepository<Item, Long>,
-QuerydslPredicateExecutor<Item>{
+QuerydslPredicateExecutor<Item>, ItemRepositoryCustom{
 	//상품명으로 검색
 	List<Item> findByItemNm(String itemNm);
 	
