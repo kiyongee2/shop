@@ -63,7 +63,7 @@ public class ItemController {
 		return "redirect:/";
 	}
 	
-	//상품 상세 보기
+	//상품 상세 보기(상품 관리시)
 	@GetMapping("/admin/item/{itemId}")
 	public String itemDtl(@PathVariable("itemId") Long itemId, Model model) {
 		try {
@@ -120,5 +120,11 @@ public class ItemController {
 		return "item/itemMng";
 	}
 	
-	
+	//상품 상세보기(회원 - 주문하기)
+	@GetMapping("/item/{itemId}")
+	public String itemDtl(Model model, @PathVariable("itemId") Long ItemId) {
+		ItemFormDto itemFormDto = itemService.getItemDtl(ItemId);
+		model.addAttribute("item", itemFormDto);
+		return "item/itemDtl";
+	}
 }
