@@ -50,4 +50,9 @@ public class OrderItem extends BaseEntity{
 		return orderPrice * count;
 	}
 	
+	//주문 수량만큼 재고를 더해줌(주문 취소시)
+	public void cancel() {
+		this.getItem().addStock(count);  //재고 증가 로직 호출
+	}
+	
 }

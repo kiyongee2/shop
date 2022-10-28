@@ -75,6 +75,15 @@ public class Orders extends BaseEntity{
 		}
 		return totalPrice;
 	}
+	
+	//주문 상태를 취소 상태로 바꿈
+	public void cancelOrder() {
+		this.orderStatus = OrderStatus.CANCEL;
+		//같은 제품을 여러번 취소 
+		for(OrderItem orderItem : orderItems) {
+			orderItem.cancel();
+		}
+	}
 }
 
 

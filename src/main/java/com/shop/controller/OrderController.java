@@ -35,7 +35,7 @@ public class OrderController {
 	
 	//주문하기
 	@PostMapping("/order")
-	public @ResponseBody ResponseEntity order(
+	public @ResponseBody ResponseEntity<?> order(
 			@RequestBody @Valid OrderDto orderDto,
 			BindingResult bindingResult, Principal principal){
 		//유효성 검증
@@ -61,6 +61,7 @@ public class OrderController {
 		
 	}
 	
+	//주문 내역 처리
 	@GetMapping({"/orders", "/orders/{page}"}) //상단 메뉴(주문 내역)
 	public String orderHist(@PathVariable("page") Optional<Integer> page,
 			Principal principal, Model model) {
@@ -74,6 +75,9 @@ public class OrderController {
 		model.addAttribute("maxPage", 5);
 		return "order/orderHist";
 	}
+	
+	//주문 취소
+	
 	
 }
 
