@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -64,6 +66,21 @@ public class CartController {
 				cartService.getCartList(principal.getName());
 		model.addAttribute("cartItems", cartDetailList);
 		return "cart/cartList";
+	}
+	
+	//장바구니 상품 수량 업데이트
+	@PatchMapping("/cartItem/{cartItemId}")
+	public @ResponseBody ResponseEntity<?> updateCartItem(
+		   @PathVariable("cartItemId") Long cartItemId, int count,
+		   Principal principal){
+		
+		if(count <= 0) {
+			return new ResponseEntity<String>("최소 1개 이상 담아주세요", HttpStatus.BAD_REQUEST);
+		}else if(!cartService.validateCartItem(cartItemId, principal.getName())) {
+			return new ResponseEntity<String>("수정 권한이 없습니다.", HttpStatus.FORBIDDEN);
+		}
+		cartService.updateCartItem(cartItemId, count);  //상품 수정 로직 호출
+		return new ResponseEntity<Long>(cartItemId, HttpStatus.OK);
 	}
 	
 	
