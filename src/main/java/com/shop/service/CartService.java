@@ -11,6 +11,8 @@ import org.thymeleaf.util.StringUtils;
 
 import com.shop.dto.CartDetailDto;
 import com.shop.dto.CartItemDto;
+import com.shop.dto.CartOrderDto;
+import com.shop.dto.OrderDto;
 import com.shop.entity.Cart;
 import com.shop.entity.CartItem;
 import com.shop.entity.Item;
@@ -31,6 +33,7 @@ public class CartService {
 	private final MemberRepository memberRepo;
 	private final CartRepository cartRepo;
 	private final CartItemRepository cartItemRepo;
+	private final OrderService orderService;
 	
 	//장바구니 생성(담기)
 	public Long addCart(CartItemDto cartItemDto, String email) {
@@ -101,6 +104,39 @@ public class CartService {
 		CartItem cartItem = cartItemRepo.findById(cartItemId)
 				.orElseThrow(EntityNotFoundException::new);
 		cartItem.updateCount(count);
+	}
+	
+	//장바구니 상품 삭제
+	public void deleteCartItem(Long cartItemId) {
+		CartItem cartItem = cartItemRepo.findById(cartItemId)
+				.orElseThrow(EntityNotFoundException::new);
+		cartItemRepo.delete(cartItem);
+	}
+	
+	//장바구니 품목 주문하기
+	public Long orderCartItem(List<CartOrderDto> cartOrderDtoList, String email) {
+		//orderDtoList 생성
+		List<OrderDto> orderDtoList = new ArrayList<>();
+		
+		for(CartOrderDto cartOrderDto: cartOrderDtoList) {
+			CartItem cartItem = cartItemRepo.findById(cartOrderDto.getCartItemId())
+					.orElseThrow(EntityNotFoundException::new);
+			
+			OrderDto orderDto = new OrderDto();
+			orderDto.setItemId(cartItem.getItem().getId());
+			orderDto.setCount(cartItem.getCount());
+			orderDtoList.add(orderDto);
+		}
+		
+		//주문 후 장바구니 품목 삭제
+		for(CartOrderDto cartOrderDto : cartOrderDtoList) {
+			CartItem cartItem = cartItemRepo.findById(cartOrderDto.getCartItemId())
+					.orElseThrow(EntityNotFoundException::new);
+			cartItemRepo.delete(cartItem);
+		}
+		
+		Long orderId = orderService.orders(orderDtoList, email);	
+		return orderId;
 	}
 }
 

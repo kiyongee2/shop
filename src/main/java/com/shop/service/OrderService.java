@@ -105,6 +105,24 @@ public class OrderService {
 		order.cancelOrder();  //orders 엔티티의 취소 로직 호출
 	}
 	
+	//장바구니 상품 주문하기
+	public Long orders(List<OrderDto> orderDtoList, String email) {
+		Member member = memberRepo.findByEmail(email);
+		List<OrderItem> orderItemList = new ArrayList<>();
+		
+		for(OrderDto orderDto : orderDtoList) {
+			Item item = itemRepo.findById(orderDto.getItemId())
+					.orElseThrow(EntityNotFoundException::new);
+			OrderItem orderItem = 
+					OrderItem.createOrderItem(item, orderDto.getCount());
+			orderItemList.add(orderItem);
+		}
+		
+		//주문 객체 생성
+		Orders order = Orders.createOrder(member, orderItemList);
+		orderRepo.save(order);  //주문하기 저장
+		return order.getId();
+	}
 	
 	
 	
