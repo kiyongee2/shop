@@ -25,7 +25,7 @@ public class MemberServiceTest {
 	PasswordEncoder pwEncoder;
 	
 	//회원 생성
-	public Member createMember() {
+	/*public Member createMember() {
 		MemberFormDto memberFormDto = new MemberFormDto();
 		memberFormDto.setEmail("test3@test.com");
 		memberFormDto.setName("이순신");

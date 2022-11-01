@@ -36,7 +36,7 @@ public class ItemServiceTest {
 	ItemImgRepository itemImgRepo;
 	
 	//가짜 이미지 파일 생성
-	List<MultipartFile> createMultipartFiles(){
+	/*List<MultipartFile> createMultipartFiles(){
 		List<MultipartFile> multipartFileList = 
 				new ArrayList<>();
 		
@@ -71,7 +71,7 @@ public class ItemServiceTest {
 		
 		assertEquals(itemFormDto.getItemNm(), item.getItemNm());
 		assertEquals(itemFormDto.getItemDetail(), item.getItemDetail());
-	}
+	}*/
 	
 	
 	

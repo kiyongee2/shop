@@ -23,6 +23,7 @@ import com.shop.repository.ItemRepository;
 
 import lombok.RequiredArgsConstructor;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class ItemService {

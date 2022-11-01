@@ -39,7 +39,6 @@ public class Item extends BaseEntity{
 	@Column(nullable = false)
 	private int stockNumber; //재고 수량
 	
-	@Lob   //Large object
 	@Column(nullable = false)
 	private String itemDetail; //상세 설명
 	

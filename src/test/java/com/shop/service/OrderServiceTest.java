@@ -37,7 +37,7 @@ public class OrderServiceTest {
 	MemberRepository memberRepo;
 	
 	//상품 저장
-	public Item saveItem() {
+	/*public Item saveItem() {
 		Item item = new Item();
 		item.setItemNm("test 상품");
 		item.setPrice(10000);
@@ -74,7 +74,7 @@ public class OrderServiceTest {
 		
 		assertEquals(totalPrice, order.getTotalPrice());
 		
-	}
+	}*/
 	
 	
 	

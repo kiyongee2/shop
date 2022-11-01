@@ -68,7 +68,7 @@ public class ItemRepositoryTest {
 		}
 	}*/
 	
-	@Test
+	/*@Test
 	public void createItemList2() {
 		for(int i=1; i<=5; i++) {
 			Item item = new Item();
@@ -121,7 +121,7 @@ public class ItemRepositoryTest {
 		for(Item resultItem : resultItemList) {
 			System.out.println(resultItem.toString());
 		}
-	}
+	}*/
 	
 	
 }

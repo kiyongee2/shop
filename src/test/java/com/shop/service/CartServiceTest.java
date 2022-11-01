@@ -37,7 +37,7 @@ public class CartServiceTest {
 	CartService cartService;
 	
 	//상품 저장
-	public Item saveItem() {
+	/*public Item saveItem() {
 		Item item = new Item();
 		item.setItemNm("test 상품");
 		item.setPrice(10000);
@@ -71,7 +71,7 @@ public class CartServiceTest {
 		assertEquals(item.getId(), cartItem.getItem().getId());
 		//수량 테스트(장바구니 담은 수량, 실제 장바구니에 저장된 수량)
 		assertEquals(cartItemDto.getCount(), cartItem.getCount());
-	}
+	}*/
 }
 
 
