@@ -33,8 +33,8 @@ public class BoardController {
 	
 	//게시글 목록 보기
 	/*@GetMapping("/list")
-	public String list(Model model, Member member, BoardDto boardDto) {
-		List<BoardDto> boardList = boardService.getBoardList(member);
+	public String list(Model model, BoardDto boardDto) {
+		List<BoardDto> boardList = boardService.getBoardList();
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("dto", new BoardDto());
 		return "board/list";

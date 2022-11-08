@@ -30,12 +30,10 @@ public class BoardService {
 	private final BoardRepository boardRepo;
 	private final MemberRepository memberRepo;
 	
-	//글쓰기
+	//글쓰기(Create)
 	public void register(BoardDto boardDto) {
 		Board board = boardDto.createBoard();
 		boardRepo.save(board);
-		
-		//return board.getId();
 	}
 	
 	//게시글 목록 보기(검색, 페이징)
@@ -48,7 +46,7 @@ public class BoardService {
 	public BoardDto getBoardDtl(Long id) {
 		Board board = boardRepo.findById(id)
 				.orElseThrow(EntityNotFoundException::new);
-		BoardDto boardDto = BoardDto.of(board);
+		BoardDto boardDto = BoardDto.of(board); //entity -> dto
 		return boardDto;
 				
 	}

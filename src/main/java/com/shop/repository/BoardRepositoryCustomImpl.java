@@ -25,6 +25,7 @@ public class BoardRepositoryCustomImpl implements BoardRepositoryCustom{
 		this.queryFactory = new JPAQueryFactory(em);
 	}
 	
+	//제목, 내용, 작성자
 	private BooleanExpression searchByLike(String searchBy, String searchQuery){
 		if(StringUtils.equals("title", searchBy)){
             return QBoard.board.title.like("%" + searchQuery + "%");
@@ -44,9 +45,9 @@ public class BoardRepositoryCustomImpl implements BoardRepositoryCustom{
 		List<Board> content = queryFactory
 				.selectFrom(QBoard.board)
 				.where(searchByLike(boardSearchDto.getSearchBy(), boardSearchDto.getSearchQuery()))
-				.orderBy(QBoard.board.id.desc())
-				.offset(pageable.getOffset())
-				.limit(pageable.getPageSize())
+				.orderBy(QBoard.board.id.desc())  //내림차순
+				.offset(pageable.getOffset())   //0 페이지(시작인덱스)
+				.limit(pageable.getPageSize())  //페이지당 개수
 				.fetch();
 		
 		//검색한 전체 개수

@@ -30,7 +30,8 @@
 </th:block>
 
 <div layout:fragment="content" style="margin-left:25%; margin-right:25%">
-	<form th:action="@{'/board/list/' + ${boards.number}}" role="form" method="get" th:object="${boards}">
+	<form th:action="@{'/board/list/' + ${boards.number}}" role="form" 
+		  method="get">
 	<table class="table table-striped my-4">
 		<thead>
 	        <tr>
